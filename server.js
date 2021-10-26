@@ -1,5 +1,6 @@
 const express = require('express')
-
+const app = express()
+app.use(express.json())
 const path = require('path')
 
 const Rollbar = require('rollbar')
@@ -9,7 +10,7 @@ let rollbar = new Rollbar({
     captureUncaught: true,
     captureUnhandledRejections: true
 })
-const app = express()
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -41,7 +42,7 @@ app.post('/api/student', (req, res) => {
 })
 
 app.get('/style', (req,res) =>{
-    res.sendFile(path.join(__fitname, '/public/styles.css'))
+    res.sendFile(path.join(__dirname, '/public/styles.css'))
 }
 )
 app.use(rollbar.errorHandler())
